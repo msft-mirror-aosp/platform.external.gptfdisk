@@ -71,6 +71,7 @@ GPTData::GPTData(void) {
    state = gpt_valid;
    device = "";
    justLooking = 0;
+   syncing = 1;
    mainCrcOk = 0;
    secondCrcOk = 0;
    mainPartsCrcOk = 0;
@@ -95,6 +96,7 @@ GPTData::GPTData(string filename) {
    state = gpt_invalid;
    device = "";
    justLooking = 0;
+   syncing = 1;
    mainCrcOk = 0;
    secondCrcOk = 0;
    mainPartsCrcOk = 0;
@@ -130,6 +132,7 @@ GPTData & GPTData::operator=(const GPTData & orig) {
    diskSize = orig.diskSize;
    state = orig.state;
    justLooking = orig.justLooking;
+   syncing = orig.syncing;
    mainCrcOk = orig.mainCrcOk;
    secondCrcOk = orig.secondCrcOk;
    mainPartsCrcOk = orig.mainPartsCrcOk;
@@ -750,12 +753,7 @@ int GPTData::LoadPartitions(const string & deviceFilename) {
               << "'sysctl kern.geom.debugflags=16' at a shell prompt, and re-running this\n"
               << "program.\n";
 #endif
-#if defined (__APPLE__)
-         cout << "You may need to deactivate System Integrity Protection to use this program. See\n"
-              << "https://www.quora.com/How-do-I-turn-off-the-rootless-in-OS-X-El-Capitan-10-11\n"
-              << "for more information.\n";
-#endif
-              cout << "\n";
+         cout << "\n";
       } // if
       myDisk.Close(); // Close and re-open read-only in case of bugs
    } else allOK = 0; // if
@@ -1149,7 +1147,7 @@ int GPTData::SaveGPTData(int quiet) {
          // original partition table from its cache. OTOH, such restoration might be
          // desirable if the error occurs later; but that seems unlikely unless the initial
          // write fails....
-         if (syncIt)
+         if (syncIt && syncing)
             myDisk.DiskSync();
 
          if (allOK) { // writes completed OK
@@ -1381,7 +1379,9 @@ int GPTData::DestroyGPT(void) {
             allOK = 0;
          } // if
       } // if
-      myDisk.DiskSync();
+      if (syncing) {
+         myDisk.DiskSync();
+      }
       myDisk.Close();
       cout << "GPT data structures destroyed! You may now partition the disk using fdisk or\n"
            << "other utilities.\n";
