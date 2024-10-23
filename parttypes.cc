@@ -19,7 +19,7 @@ using namespace std;
 int PartType::numInstances = 0;
 AType* PartType::allTypes = NULL;
 AType* PartType::lastType = NULL;
-const PartType PartType::unusedPartType = (GUIDData) "00000000-0000-0000-0000-000000000000";
+const GUIDData PartType::unusedPartType = "00000000-0000-0000-0000-000000000000";
 
 #define SCREEN_WIDTH 80
 #define NUM_COLUMNS 2

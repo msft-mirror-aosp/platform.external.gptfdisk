@@ -35,7 +35,7 @@ protected:
    void AddAllTypes(void);
 public:
    // PartType with GUID "00000000-0000-0000-0000-000000000000"
-   static const PartType unusedPartType;
+   static const GUIDData unusedPartType;
 
    PartType(void);
    PartType(const PartType & orig);
@@ -50,6 +50,7 @@ public:
    PartType & operator=(const char * orig);
 
    // Assignment operators based on base class....
+   GUIDData & operator=(const PartType & orig) {return GUIDData::operator=(orig);}
    GUIDData & operator=(const GUIDData & orig) {return GUIDData::operator=(orig);}
 
    // New data assignment
