@@ -4,6 +4,9 @@
 - Fixed bug that caused Unicode characters greater than 0x10000 to be
   displayed incorrectly. Fix courtesy of Ulrich Müller.
 
+- Added type code GUIDs for Minix (0x8100), Emu86/AmigaOS (0xdc00),
+  and NeuralMesh (0xdd00).
+
 1.0.10 (2/19/2024):
 -------------------
 

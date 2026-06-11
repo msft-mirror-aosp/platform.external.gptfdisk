@@ -131,6 +131,14 @@ void PartType::AddAllTypes(void) {
    AddType(0x7f04, "09845860-705F-4BB5-B16C-8A8A099CAF52", "ChromeOS mini-OS");
    AddType(0x7f05, "3F0F8318-F146-4E6B-8222-C28C8F02E0D5", "ChromeOS hibernate");
 
+   // Minix filesystem partition
+   // Note: According to https://aeb.win.tue.nl/partitions/partition_types-1.html,
+   // Minix used MBR type code 0x80 up to version 1.4a, 0x81 starting with
+   // 1.4b, and 0x41 when sharing a disk with DR-DOS. I'm using 0x8100 since
+   // MBR 0x81 seems likely to be the most common variant, although I've never
+   // used Minix, so I'm really guessing about that.
+   AddType(0x8100, "481B2A38-0561-420B-B72A-F1C4988EFC16", "Minix filesystem");
+
    // Linux-specific partition types....
    AddType(0x8200, "0657FD6D-A4AB-43C4-84E5-0933C84B4F4F", "Linux swap"); // Linux swap (or Solaris on MBR)
    AddType(0x8300, "0FC63DAF-8483-4772-8E79-3D69D8477DE4", "Linux filesystem"); // Linux native
@@ -441,6 +449,14 @@ void PartType::AddAllTypes(void) {
    // Wikipedia page for GPT, so here we go....
    AddType(0xc001, "75894C1E-3AEB-11D3-B7C1-7B03A0000000", "HP-UX data");
    AddType(0xc002, "E2A1E728-32E3-11D6-A682-7B03A0000000", "HP-UX service");
+
+   // Emu68/AmigaOS partition (includes Rigid Disk Block); again, no known
+   // MBR equivalent
+   AddType(0xdc00, "3F82EEBC-87C9-4097-8165-89D6540557C0", "emu68/AmigaOS");
+
+   // Weka NeuralMesh (Storage System) data partition; again, no known MBR
+   // equivalent
+   AddType(0xdd00, "993EC906-B4E2-11E7-A205-A0A8CD3EA1DE", "Weka NeuralMesh data");
 
    // Open Network Install Environment (ONIE) partitions....
    AddType(0xe100, "7412F7D5-A156-4B13-81DC-867174929325", "ONIE boot");
