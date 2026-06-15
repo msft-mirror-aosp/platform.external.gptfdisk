@@ -21,7 +21,7 @@ The contents of this archive are:
 - refind.crt -- The rEFInd public key, .crt form
 
 The gdisk_x64.efi binary included here is built using the UEFI GPT fdisk
-library (https://sourceforge.net/p/uefigptfdisk/), which is a beta-level
+library (https://github.com/jpz4085/UEFI-GPT-fdisk), which is a beta-level
 partial C++ library for UEFI. To use it, you must copy it to your EFI
 System Partition (ESP) or some other EFI-accessible location. Under Linux,
 the ESP is usually one of the first two or three partitions on /dev/sda.

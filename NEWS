@@ -7,6 +7,15 @@
 - Added type code GUIDs for Minix (0x8100), Emu86/AmigaOS (0xdc00),
   and NeuralMesh (0xdd00).
 
+- A fork of the UEFI GPT fdisk project
+  (https://sourceforge.net/projects/uefigptfdisk/) has appeared on GitHub,
+  at https://github.com/jpz4085/UEFI-GPT-fdisk. I'm now able to compile the
+  EFI version of GPT fdisk with this library, but most of the newer EFIs
+  won't launch it, reporting "unsupported" when attempting to do so. This
+  problem also afflicts the latest version of GPT fdisk for UEFI that built
+  before this point (1.0.4), though, so I've resumed building and
+  distributing this binary, despite this flaw.
+
 1.0.10 (2/19/2024):
 -------------------
 
